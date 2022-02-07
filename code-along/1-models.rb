@@ -11,10 +11,49 @@ Company.destroy_all
 # 1a. check out the schema file
 # 1b. check out the model file
 
-# 2. create new companies
+puts "There are #{Company.all.count} companies"
 
+# 2. create new companies
+values = {name:"Apple", url:"https://apple.com", city: "Cupertino", state: "CA" }
+company = Company.new(values) 
+company.save
+
+values = {name:"Amazon", url:"https://amazon.com", city: "Seattle", state: "WA" }
+company = Company.new(values) 
+company.save
+
+company = Company.new
+company.write_attribute(:name, "Tesla")
+company.write_attribute(:url, "https://tesla.com")
+company.write_attribute(:city, "Palo Alto")
+company.write_attribute(:state, "CA")
+company.save
+
+puts "There are #{Company.all.count} companies"
 # 3. query companies table
+
+
+apple = Company.where({state:"CA", name:"Apple"})[0]
+#puts apple.inspect
+
+#apple=Company.where({id:27})[0]
 
 # 4. read column values from row
 
+puts apple.read_attribute(:url)
+puts apple.read_attribute(:city)
+puts apple.read_attribute(:state)
+
+puts "#{apple.name} has a website #{apple.url}"
+
 # 5. update attribute value
+#apple.write_attribute(:slogan, "Think Different.")
+apple.slogan = "Think Different."
+
+apple.save
+puts apple.inspect
+
+
+tesler = Company.new({name:"Tesler"})
+tesler.save
+tesler.destroy

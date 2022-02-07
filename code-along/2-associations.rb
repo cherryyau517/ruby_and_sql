@@ -4,6 +4,16 @@
 # rails runner code-along/2-associations.rb
 
 # 1. Query all of the contacts at Apple Inc.
+ #apple = Company.where({name:"Apple"})[0]
+
+ #contacts = Contact.where({company_id: apple.id}) > this is resolved by defining the class in the model, and then replaced by the code on line 12
+ # puts contacts.inspect
+
+ contacts = Contact.all
+
+ for contact in contacts
+    puts"#{contact.first_name} #{contact.last_name} - #{contact.email} - #{contact.company.name}"
+end 
 
 # 2. add association to contacts in Company model
 
